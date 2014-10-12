@@ -16,6 +16,18 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".GalleryActivity"
+            android:label="@string/title_activity_gallery" >
+        </activity>
+        <activity
+            android:name=".AddPlaceActivity"
+            android:label="@string/title_activity_add_place" >
+        </activity>
+        <activity
+            android:name=".SinglePictureActivity"
+            android:label="@string/title_activity_single_picture" >
+        </activity>
     </application>
 
 </manifest>
