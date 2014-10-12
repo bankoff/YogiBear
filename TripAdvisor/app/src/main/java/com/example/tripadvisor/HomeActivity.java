@@ -1,17 +1,28 @@
 package com.example.tripadvisor;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 
 
-public class HomeActivity extends Activity {
+public class HomeActivity extends Activity implements View.OnClickListener {
+
+    private Button btnAddPlace, btnViewGallery;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
+
+        btnAddPlace = (Button) this.findViewById(R.id.add_place_button);
+        btnViewGallery = (Button) this.findViewById(R.id.view_gallery_button);
+        btnAddPlace.setOnClickListener(this);
+        btnViewGallery.setOnClickListener(this);
     }
 
 
@@ -32,5 +43,19 @@ public class HomeActivity extends Activity {
             return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onClick(View view) {
+if (view.getId() == R.id.add_place_button) {
+        Intent intent = new Intent(HomeActivity.this,
+        AddPlaceActivity.class);
+        this.startActivity(intent);
+        }
+        if (view.getId() == R.id.view_gallery_button) {
+            Intent intent = new Intent(HomeActivity.this,
+                    GalleryActivity.class);
+            this.startActivity(intent);
+        }
     }
 }
