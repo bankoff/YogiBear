@@ -9,41 +9,29 @@
     tools:context=".HomeActivity"
     android:textAlignment="center"
     android:paddingStart="5dp"
-    android:paddingEnd="5dp">
+    android:paddingEnd="5dp"
+    android:background="@drawable/three">
 
     <Button
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Add Place"
         android:id="@+id/add_place_button"
-        android:layout_marginBottom="46dp"
-        android:layout_alignParentBottom="true"
+        android:layout_above="@+id/view_gallery_button"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:clickable="true"
-        android:height="60sp"
-        android:gravity="left|bottom"
-        android:padding="5dp"
-        android:paddingLeft="10dp"
-        android:paddingTop="5dp"
-        android:paddingRight="10dp"
-        android:paddingBottom="5dp" />
+        android:height="70dp"
+        android:textSize="30dp" />
 
     <Button
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="View Gallery"
         android:id="@+id/view_gallery_button"
-        android:clickable="true"
-        android:height="60sp"
-        android:gravity="right|bottom"
-        android:padding="5dp"
-        android:paddingLeft="10dp"
-        android:paddingTop="5dp"
-        android:paddingRight="10dp"
-        android:paddingBottom="5dp"
-        android:layout_alignTop="@+id/add_place_button"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginRight="36dp" />
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:height="70dp"
+        android:textSize="30dp"
+        android:visibility="visible" />
 </RelativeLayout>
