@@ -37,13 +37,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/title_input"
+        android:text="Add title here"
         android:layout_below="@+id/title_text"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_marginTop="10dp"
-        android:layout_marginLeft="20dp"
-        android:hint="Add title here"
-        android:textSize="20dp" />
+        android:layout_marginLeft="20dp" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -75,10 +74,9 @@
         android:layout_alignTop="@+id/single_distance"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
+        android:text="Add description here"
         android:layout_marginTop="-20dp"
-        android:layout_marginLeft="10dp"
-        android:hint="Add description here"
-        android:textSize="20dp" />
+        android:layout_marginLeft="10dp" />
 
     <Button
         style="?android:attr/buttonStyleSmall"

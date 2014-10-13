@@ -25,7 +25,7 @@ public class AddPlaceActivity extends Activity implements View.OnClickListener {
     //****************************************//
     private MyLocationListener locationListener;
     private LocationManager lm;
-    private Location finalLocation;
+//    private Location finalLocation;
     //****************************************//
 
 
@@ -59,13 +59,13 @@ public class AddPlaceActivity extends Activity implements View.OnClickListener {
         @Override
         public void onLocationChanged(Location location) {
             if (location!=null){
-//                Toast.makeText(
-//                        getBaseContext(),
-//                        "Location changed: \nLat: " + location.getLatitude()
-//                                + "\nLong: " + location.getLongitude(),
-//                        Toast.LENGTH_SHORT).show();
+                Toast.makeText(
+                        getBaseContext(),
+                        "Location changed: \nLat: " + location.getLatitude()
+                                + "\nLong: " + location.getLongitude(),
+                        Toast.LENGTH_SHORT).show();
 
-                finalLocation=location;
+//                finalLocation=location;
             }
         }
 
@@ -146,14 +146,14 @@ public class AddPlaceActivity extends Activity implements View.OnClickListener {
             startCamera();
         }
         if (view.getId() == R.id.create_button) {
-//            Toast.makeText(context, "Send info to the database and create the place", Toast.LENGTH_SHORT)
-//                    .show();
+            Toast.makeText(context, "Send info to the database and create the place", Toast.LENGTH_SHORT)
+                    .show();
 
-            Toast.makeText(
-                    getBaseContext(),
-                    "Location changed: \nLat: " + finalLocation.getLatitude()
-                            + "\nLong: " + finalLocation.getLongitude(),
-                    Toast.LENGTH_SHORT).show();
+//            Toast.makeText(
+//                    getBaseContext(),
+//                    "Location changed: \nLat: " + finalLocation.getLatitude()
+//                            + "\nLong: " + finalLocation.getLongitude(),
+//                    Toast.LENGTH_SHORT).show();
         }
     }
 }
