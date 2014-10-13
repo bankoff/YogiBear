@@ -3,6 +3,9 @@ package com.example.tripadvisor;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.location.Location;
+import android.location.LocationListener;
+import android.location.LocationManager;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -19,6 +22,13 @@ public class AddPlaceActivity extends Activity implements View.OnClickListener {
     final Context context = this;
     private ImageView mView;
 
+    //****************************************//
+    private MyLocationListener locationListener;
+    private LocationManager lm;
+    private Location finalLocation;
+    //****************************************//
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -29,7 +39,68 @@ public class AddPlaceActivity extends Activity implements View.OnClickListener {
         btnAddPicture.setOnClickListener(this);
         btnCreatePlace.setOnClickListener(this);
         mView = (ImageView) findViewById(R.id.imageView3);
+
+        //**************************************************************//
+        locationListener=new MyLocationListener();
+        lm = (LocationManager)getSystemService(Context.LOCATION_SERVICE);
+        //**************************************************************//
     }
+
+    //******************************************************************//
+    @Override
+    protected void onResume() {
+        super.onResume();
+                                                            //1sec,1000m
+        lm.requestLocationUpdates(LocationManager.GPS_PROVIDER,1000,1000,locationListener);
+    }
+
+    private class MyLocationListener implements LocationListener {
+
+        @Override
+        public void onLocationChanged(Location location) {
+            if (location!=null){
+//                Toast.makeText(
+//                        getBaseContext(),
+//                        "Location changed: \nLat: " + location.getLatitude()
+//                                + "\nLong: " + location.getLongitude(),
+//                        Toast.LENGTH_SHORT).show();
+
+                finalLocation=location;
+            }
+        }
+
+        @Override
+        public void onStatusChanged(String provider, int status, Bundle extras) {
+            String statusString = "";
+            switch (status){
+                case android.location.LocationProvider.AVAILABLE:
+                    statusString = "available";
+                case android.location.LocationProvider.OUT_OF_SERVICE:
+                    statusString = "out of service";
+                case android.location.LocationProvider.TEMPORARILY_UNAVAILABLE:
+                    statusString = "temporarily unavailable";
+            }
+            Toast.makeText(getBaseContext(), provider + " " + statusString,
+                    Toast.LENGTH_SHORT).show();
+        }
+
+        @Override
+        public void onProviderEnabled(String provider) {
+            Toast.makeText(
+                    getBaseContext(),
+                    "Provider: " + provider + " enabled",
+                    Toast.LENGTH_SHORT).show();
+        }
+
+        @Override
+        public void onProviderDisabled(String provider) {
+            Toast.makeText(
+                    getBaseContext(),
+                    "Provider: " + provider + " disabled",
+                    Toast.LENGTH_SHORT).show();
+        }
+    }
+    //******************************************************************//
 
 
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -75,8 +146,14 @@ public class AddPlaceActivity extends Activity implements View.OnClickListener {
             startCamera();
         }
         if (view.getId() == R.id.create_button) {
-            Toast.makeText(context, "Send info to the database and create the place", Toast.LENGTH_SHORT)
-                    .show();
+//            Toast.makeText(context, "Send info to the database and create the place", Toast.LENGTH_SHORT)
+//                    .show();
+
+            Toast.makeText(
+                    getBaseContext(),
+                    "Location changed: \nLat: " + finalLocation.getLatitude()
+                            + "\nLong: " + finalLocation.getLongitude(),
+                    Toast.LENGTH_SHORT).show();
         }
     }
 }
