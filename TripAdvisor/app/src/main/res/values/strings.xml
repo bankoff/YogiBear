@@ -7,5 +7,6 @@
     <string name="title_activity_gallery">GalleryActivity</string>
     <string name="title_activity_add_place">AddPlaceActivity</string>
     <string name="title_activity_single_picture">SinglePictureActivity</string>
+    <string name="title_activity_add_to_database">AddToDatabaseActivity</string>
 
 </resources>

@@ -24,4 +24,13 @@
         android:layout_below="@+id/places_text"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="30dp" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="New Button"
+        android:id="@+id/buttonShow"
+        android:layout_alignBottom="@+id/places_text"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
 </RelativeLayout>

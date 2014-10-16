@@ -11,6 +11,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 import android.content.Context;
@@ -21,11 +22,15 @@ public class AddPlaceActivity extends Activity implements View.OnClickListener {
     private Button btnAddPicture, btnCreatePlace;
     final Context context = this;
     private ImageView mView;
+    public static EditText title, description;
+    public static String longitudeValue = "#";
+    public static String latitudeValue = "#";
+
 
     //****************************************//
     private MyLocationListener locationListener;
     private LocationManager lm;
-//    private Location finalLocation;
+    //    private Location finalLocation;
     private Location toastLocation;
     //****************************************//
 
@@ -42,32 +47,39 @@ public class AddPlaceActivity extends Activity implements View.OnClickListener {
         mView = (ImageView) findViewById(R.id.imageView3);
 
         //**************************************************************//
-        locationListener=new MyLocationListener();
-        lm = (LocationManager)getSystemService(Context.LOCATION_SERVICE);
+        locationListener = new MyLocationListener();
+        lm = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
         //**************************************************************//
+
+
     }
 
     //******************************************************************//
     @Override
     protected void onResume() {
         super.onResume();
-                                                            //1sec,1000m
-        lm.requestLocationUpdates(LocationManager.GPS_PROVIDER,1000,1000,locationListener);
+        //1sec,1000m
+        lm.requestLocationUpdates(LocationManager.GPS_PROVIDER, 1000, 1000, getLocationListener());
     }
 
     public Location getToastLocation() {
-            return toastLocation;
+        return toastLocation;
     }
 
     public void setToastLocation(Location toastLocation) {
         this.toastLocation = toastLocation;
     }
 
+
+    public MyLocationListener getLocationListener() {
+        return locationListener;
+    }
+
     private class MyLocationListener implements LocationListener {
 
         @Override
         public void onLocationChanged(Location location) {
-            if (location!=null){
+            if (location != null) {
                 Toast.makeText(
                         getBaseContext(),
                         "Location changed: \nLat: " + location.getLatitude()
@@ -76,13 +88,17 @@ public class AddPlaceActivity extends Activity implements View.OnClickListener {
 
 //                finalLocation=location;
                 setToastLocation(location);
+
+                longitudeValue = String.valueOf(location.getLongitude());
+                latitudeValue = String.valueOf(location.getLatitude());
+
             }
         }
 
         @Override
         public void onStatusChanged(String provider, int status, Bundle extras) {
             String statusString = "";
-            switch (status){
+            switch (status) {
                 case android.location.LocationProvider.AVAILABLE:
                     statusString = "available";
                 case android.location.LocationProvider.OUT_OF_SERVICE:
@@ -120,6 +136,7 @@ public class AddPlaceActivity extends Activity implements View.OnClickListener {
             Bundle extras = data.getExtras();
             Bitmap photo = (Bitmap) extras.get("data");
             mView.setImageBitmap(photo);
+
         }
     }
 
@@ -159,25 +176,42 @@ public class AddPlaceActivity extends Activity implements View.OnClickListener {
 //            Toast.makeText(context, "Send info to the database and create the place", Toast.LENGTH_SHORT)
 //                    .show();
 
-              if(getToastLocation()!=null) {
-                    Toast.makeText(
-                            getBaseContext(),
-                            "Location added !!! \nLat: " + getToastLocation().getLatitude()
-                                    + "\nLong: " + getToastLocation().getLongitude(),
-                            Toast.LENGTH_SHORT).show();
-              }
-              else{
-                  Toast.makeText(
-                          getBaseContext(),
-                          "No Location !!!!!",
-                          Toast.LENGTH_SHORT).show();
-              }
+            if (getToastLocation() != null) {
+                Toast.makeText(
+                        getBaseContext(),
+                        "Location added !!! \nLat: " + getToastLocation().getLatitude()
+                                + "\nLong: " + getToastLocation().getLongitude(),
+                        Toast.LENGTH_SHORT).show();
+            } else {
+                Toast.makeText(
+                        getBaseContext(),
+                        "No Location !!!!!",
+                        Toast.LENGTH_SHORT).show();
+            }
 
 //            Toast.makeText(
 //                    getBaseContext(),
 //                    "Location changed: \nLat: " + finalLocation.getLatitude()
 //                            + "\nLong: " + finalLocation.getLongitude(),
 //                    Toast.LENGTH_SHORT).show();
+            //Create place
+
+            title = (EditText) this.findViewById(R.id.title_input);
+            description = (EditText) findViewById(R.id.description_input);
+
+            if (title.getText().toString().length() >= 3 &&
+                    description.getText().toString().length() >= 3) {
+                Intent intent = new Intent(AddPlaceActivity.this,
+                        AddToDatabaseActivity.class);
+                this.startActivity(intent);
+
+            }
+            else
+            {
+                Toast.makeText(context, "Invalid Title or Description. The must be at least 3 chars long",
+                        Toast.LENGTH_SHORT).show();
+            }
+
         }
     }
 }
