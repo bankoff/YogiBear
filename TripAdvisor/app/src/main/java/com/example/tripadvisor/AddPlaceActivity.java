@@ -28,6 +28,7 @@ public class AddPlaceActivity extends Activity implements View.OnClickListener {
     public static String longitudeValue = "#";
     public static String latitudeValue = "#";
     public static String pictureName = "#";
+    public  static  Bitmap pic;
 
 
     //****************************************//
@@ -138,6 +139,7 @@ public class AddPlaceActivity extends Activity implements View.OnClickListener {
         if (resultCode == RESULT_OK) {
             Bundle extras = data.getExtras();
             Bitmap photo = (Bitmap) extras.get("data");
+            pic = photo;
 
             //Add picture name
             Random rand = new Random();
