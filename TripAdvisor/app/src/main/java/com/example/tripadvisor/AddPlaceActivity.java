@@ -16,15 +16,18 @@ import android.widget.ImageView;
 import android.widget.Toast;
 import android.content.Context;
 
+import java.util.Random;
+
 
 public class AddPlaceActivity extends Activity implements View.OnClickListener {
 
     private Button btnAddPicture, btnCreatePlace;
     final Context context = this;
-   // private ImageView mView;
+    // private ImageView mView;
     public static EditText title, description;
     public static String longitudeValue = "#";
     public static String latitudeValue = "#";
+    public static String pictureName = "#";
 
 
     //****************************************//
@@ -44,7 +47,7 @@ public class AddPlaceActivity extends Activity implements View.OnClickListener {
         btnCreatePlace = (Button) this.findViewById(R.id.create_button);
         btnAddPicture.setOnClickListener(this);
         btnCreatePlace.setOnClickListener(this);
-       // mView = (ImageView) findViewById(R.id.imageView3);
+        // mView = (ImageView) findViewById(R.id.imageView3);
 
         //**************************************************************//
         locationListener = new MyLocationListener();
@@ -135,7 +138,13 @@ public class AddPlaceActivity extends Activity implements View.OnClickListener {
         if (resultCode == RESULT_OK) {
             Bundle extras = data.getExtras();
             Bitmap photo = (Bitmap) extras.get("data");
-          //  mView.setImageBitmap(photo);
+
+            //Add picture name
+            Random rand = new Random();
+            int randomNum = rand.nextInt((9999 - 100) + 1) + 100;
+            int randomNum2 = rand.nextInt((9999 - 100) + 1) + 100;
+            pictureName = "rosi" + randomNum + "dancho" + randomNum2;
+            //  mView.setImageBitmap(photo);
 
         }
     }
@@ -194,6 +203,7 @@ public class AddPlaceActivity extends Activity implements View.OnClickListener {
 //                    "Location changed: \nLat: " + finalLocation.getLatitude()
 //                            + "\nLong: " + finalLocation.getLongitude(),
 //                    Toast.LENGTH_SHORT).show();
+
             //Create place
 
             title = (EditText) this.findViewById(R.id.title_input);
@@ -201,13 +211,15 @@ public class AddPlaceActivity extends Activity implements View.OnClickListener {
 
             if (title.getText().toString().length() >= 3 &&
                     description.getText().toString().length() >= 3) {
-                Intent intent = new Intent(AddPlaceActivity.this,
-                        AddToDatabaseActivity.class);
-                this.startActivity(intent);
 
-            }
-            else
-            {
+                if (pictureName.length() > 5) {
+                    Intent intent = new Intent(AddPlaceActivity.this, AddToDatabaseActivity.class);
+                    this.startActivity(intent);
+                } else {
+                    Toast.makeText(context, "You must add picture",
+                            Toast.LENGTH_SHORT).show();
+                }
+            } else {
                 Toast.makeText(context, "Invalid Title or Description. The must be at least 3 chars long",
                         Toast.LENGTH_SHORT).show();
             }
