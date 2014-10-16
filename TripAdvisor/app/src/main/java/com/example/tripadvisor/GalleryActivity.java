@@ -1,10 +1,14 @@
 package com.example.tripadvisor;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.GridView;
+import android.widget.Toast;
 
 import com.telerik.everlive.sdk.core.EverliveApp;
 import com.telerik.everlive.sdk.core.model.system.File;
@@ -18,6 +22,15 @@ public class GalleryActivity extends Activity {
     private GridView gallery;
     RequestResult<ArrayList<File>> requestResult;
     ArrayList<File> allFiles;
+    public static  Integer positionSelected  = -1;
+
+    private void gotoSingleView(int pictureIndex) {
+        Intent intent = new Intent(GalleryActivity.this,
+                SinglePictureActivity.class);
+
+        intent.putExtra(SinglePictureActivity.PICTURE_INDEX, pictureIndex);
+        this.startActivity(intent);
+    }
 
     public class UidAsyncDownloader extends AsyncTask<Void, Void, Void>{
         ArrayList<String> imgUrls = new ArrayList<String>();
@@ -44,6 +57,19 @@ public class GalleryActivity extends Activity {
         protected void onPostExecute(Void v) {
             imageAdapter = new ImageAdapter(GalleryActivity.this, imgUrls);
             gallery.setAdapter(imageAdapter);
+            gallery.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                public void onItemClick(AdapterView parent, View v, int position, long id) {
+
+
+                  positionSelected=position;
+                    gotoSingleView(position);
+
+                    Toast.makeText(GalleryActivity.this, "" + position,
+                            Toast.LENGTH_SHORT).show();
+                }
+
+
+            });
         }
     }
 
@@ -54,4 +80,5 @@ public class GalleryActivity extends Activity {
         gallery = (GridView) findViewById(R.id.grid_gallery);
         new UidAsyncDownloader().execute();
     }
+
 }

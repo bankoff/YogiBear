@@ -146,7 +146,8 @@ public class AddPlaceActivity extends Activity implements View.OnClickListener {
             int randomNum = rand.nextInt((9999 - 100) + 1) + 100;
             int randomNum2 = rand.nextInt((9999 - 100) + 1) + 100;
             pictureName = "rosi" + randomNum + "dancho" + randomNum2;
-            //  mView.setImageBitmap(photo);
+            Toast.makeText(context, "Picture added successfully", Toast.LENGTH_SHORT)
+                    .show();
 
         }
     }
@@ -179,8 +180,6 @@ public class AddPlaceActivity extends Activity implements View.OnClickListener {
     @Override
     public void onClick(View view) {
         if (view.getId() == R.id.picture_button) {
-            Toast.makeText(context, "Make pic with the camera", Toast.LENGTH_SHORT)
-                    .show();
             startCamera();
         }
         if (view.getId() == R.id.create_button) {
