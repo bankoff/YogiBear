@@ -13,7 +13,7 @@ public class PlaceDataSource {
     // Database fields
     private SQLiteDatabase database;
     private mySQLLiteHelper dbHelper;
-    private String[] allColumns = { mySQLLiteHelper.COLUMN_ID,
+    private String[] allColumns = {mySQLLiteHelper.COLUMN_ID,
             mySQLLiteHelper.COLUMN_TITLE, mySQLLiteHelper.COLUMN_DESCRIPTION,
             mySQLLiteHelper.COLUMN_LONGITUDE, mySQLLiteHelper.COLUMN_LATITUDE,
             mySQLLiteHelper.COLUMN_PICTUREPATH};
@@ -30,7 +30,7 @@ public class PlaceDataSource {
         dbHelper.close();
     }
 
-    public Place createPlace(String title, String description,  String longitude,
+    public Place createPlace(String title, String description, String longitude,
                              String latitude, String picturePath) {
         ContentValues values = new ContentValues();
         values.put(mySQLLiteHelper.COLUMN_TITLE, title);
@@ -49,6 +49,8 @@ public class PlaceDataSource {
         cursor.close();
         return newPlace;
     }
+
+
 
 //    public void deleteComment(Comment comment) {
 //        long id = comment.getId();
@@ -75,7 +77,7 @@ public class PlaceDataSource {
     }
 
     private Place cursorToPlace(Cursor cursor) {
-        Place place = new Place( );
+        Place place = new Place();
         place.setId(cursor.getLong(0));
         place.setTitle(cursor.getString(1));
         place.setDescription(cursor.getString(2));

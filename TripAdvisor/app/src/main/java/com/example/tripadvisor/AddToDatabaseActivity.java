@@ -3,6 +3,7 @@ package com.example.tripadvisor;
 import android.app.Activity;
 import android.app.ListActivity;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
@@ -31,8 +32,11 @@ import database.PlaceDataSource;
 
 
 public class AddToDatabaseActivity extends ListActivity {
+
+
+    public  static List<Place> allPlacesFromTheBase = new ArrayList<Place>();
     public EverliveApp app = new EverliveApp("iEFw0m2S2kX61YKR");
-    private PlaceDataSource datasource;
+    public static PlaceDataSource datasource;
     final Context context = this;
     //  private  String picturePath;
     String titlePlace = (AddPlaceActivity.title).getText().toString();
@@ -50,11 +54,11 @@ public class AddToDatabaseActivity extends ListActivity {
         datasource = new PlaceDataSource(this);
         datasource.open();
 
-        List<Place> values = datasource.getAllPlaces();
+        allPlacesFromTheBase = datasource.getAllPlaces();
 
         List<String> placesNames = new ArrayList<String>();
 
-        for (Place item : values) {
+        for (Place item : allPlacesFromTheBase) {
             placesNames.add(item.getTitle());
         }
 
@@ -91,7 +95,7 @@ public class AddToDatabaseActivity extends ListActivity {
         if (view.getId() == R.id.button_add_to_database) {
 
 
-           ArrayAdapter<String> adapter = (ArrayAdapter<String>) getListAdapter();
+            ArrayAdapter<String> adapter = (ArrayAdapter<String>) getListAdapter();
             Place place = null;
 
             place = datasource.createPlace(titlePlace, descriptionPlace, longitudePic, latitudePic, pictureInfo);
@@ -102,8 +106,16 @@ public class AddToDatabaseActivity extends ListActivity {
 
             Toast.makeText(context, "Place successfully added!", Toast.LENGTH_SHORT).show();
         }
+        else  if (view.getId() == R.id.go_to_gallery) {
+
+
+            Intent intent = new Intent(AddToDatabaseActivity.this,
+                    GalleryActivity.class);
+            this.startActivity(intent);
+        }
     }
 
+    //Backend Services
     private class UploadPicture extends Thread {
         @Override
         public void run() {
@@ -117,7 +129,7 @@ public class AddToDatabaseActivity extends ListActivity {
 
 
 //                InputStream is = new FileInputStream("/mnt/emmc/DCIM/100MEDIA/IMAG1076.jpg");
-                UploadFile(app,pictureInfo+".jpg", "image/jpeg", is);
+                UploadFile(app, pictureInfo + ".jpg", "image/jpeg", is);
                 is.close();
                 Log.i("File", "Uploaded");
             } catch (IOException e) {
