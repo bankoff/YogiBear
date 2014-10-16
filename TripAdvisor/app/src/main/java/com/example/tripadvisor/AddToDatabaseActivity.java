@@ -27,6 +27,7 @@ public class AddToDatabaseActivity extends ListActivity {
     String descriptionPlace = (AddPlaceActivity.description).getText().toString();
     String longitudePic = (AddPlaceActivity.longitudeValue);
     String latitudePic = (AddPlaceActivity.latitudeValue);
+    String pictureInfo = AddPlaceActivity.pictureName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -81,7 +82,7 @@ public class AddToDatabaseActivity extends ListActivity {
            ArrayAdapter<String> adapter = (ArrayAdapter<String>) getListAdapter();
             Place place = null;
 
-            place = datasource.createPlace(titlePlace, descriptionPlace, longitudePic, latitudePic, "gore");
+            place = datasource.createPlace(titlePlace, descriptionPlace, longitudePic, latitudePic, pictureInfo);
 
             adapter.add(place.getTitle());
             Toast.makeText(context, "Place successfully added!", Toast.LENGTH_SHORT).show();
