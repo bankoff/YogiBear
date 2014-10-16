@@ -17,7 +17,6 @@
         android:layout_toEndOf="@+id/title_text"
         android:layout_marginTop="15dp"
         android:gravity="center_horizontal"
-        android:layout_marginLeft="-25dp"
         android:textSize="30dp" />
 
     <TextView
@@ -30,7 +29,6 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_marginLeft="10dp"
-        android:layout_marginTop="10dp"
         android:textSize="20dp" />
 
     <EditText
@@ -50,12 +48,10 @@
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="Description"
         android:id="@+id/description_text"
+        android:textSize="20dp"
         android:layout_below="@+id/title_input"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginTop="10dp"
-        android:layout_marginLeft="10dp"
-        android:textSize="20dp" />
+        android:layout_alignLeft="@+id/title_text"
+        android:layout_alignStart="@+id/title_text" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -84,12 +80,10 @@
         android:layout_height="wrap_content"
         android:text="Add Picture"
         android:id="@+id/picture_button"
-        android:layout_toEndOf="@+id/single_distance"
-        android:layout_marginTop="0dp"
-        android:layout_below="@+id/description_input"
-        android:layout_toRightOf="@+id/single_distance"
-        android:layout_marginLeft="50dp"
-        android:textSize="20dp" />
+        android:textSize="30dp"
+        android:layout_above="@+id/create_button"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
 
 
 
@@ -100,22 +94,11 @@
         android:text="Create Place"
         android:id="@+id/create_button"
         android:textSize="30dp"
-        android:layout_below="@+id/picture_button"
-        android:layout_alignRight="@+id/add_place_header"
-        android:layout_alignEnd="@+id/add_place_header" />
-
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/imageView3"
         android:layout_alignParentBottom="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginBottom="57dp"
-        android:layout_toRightOf="@+id/description_input"
-        android:layout_toEndOf="@+id/description_input"
-        android:layout_below="@+id/create_button"
-        android:background="@drawable/ic_launcher" />
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+
 
 
 </RelativeLayout>

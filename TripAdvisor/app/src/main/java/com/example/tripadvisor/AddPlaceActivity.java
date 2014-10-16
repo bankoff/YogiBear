@@ -21,7 +21,7 @@ public class AddPlaceActivity extends Activity implements View.OnClickListener {
 
     private Button btnAddPicture, btnCreatePlace;
     final Context context = this;
-    private ImageView mView;
+   // private ImageView mView;
     public static EditText title, description;
     public static String longitudeValue = "#";
     public static String latitudeValue = "#";
@@ -44,7 +44,7 @@ public class AddPlaceActivity extends Activity implements View.OnClickListener {
         btnCreatePlace = (Button) this.findViewById(R.id.create_button);
         btnAddPicture.setOnClickListener(this);
         btnCreatePlace.setOnClickListener(this);
-        mView = (ImageView) findViewById(R.id.imageView3);
+       // mView = (ImageView) findViewById(R.id.imageView3);
 
         //**************************************************************//
         locationListener = new MyLocationListener();
@@ -135,7 +135,7 @@ public class AddPlaceActivity extends Activity implements View.OnClickListener {
         if (resultCode == RESULT_OK) {
             Bundle extras = data.getExtras();
             Bitmap photo = (Bitmap) extras.get("data");
-            mView.setImageBitmap(photo);
+          //  mView.setImageBitmap(photo);
 
         }
     }

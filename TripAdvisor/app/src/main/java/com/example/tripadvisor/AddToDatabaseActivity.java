@@ -11,13 +11,14 @@ import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import database.Place;
 import database.PlaceDataSource;
 
 
-public class AddToDatabaseActivity extends ListActivity  {
+public class AddToDatabaseActivity extends ListActivity {
 
     private PlaceDataSource datasource;
     final Context context = this;
@@ -38,10 +39,16 @@ public class AddToDatabaseActivity extends ListActivity  {
 
         List<Place> values = datasource.getAllPlaces();
 
+        List<String> placesNames = new ArrayList<String>();
+
+        for (Place item : values) {
+            placesNames.add(item.getTitle());
+        }
+
         // use the SimpleCursorAdapter to show the
         // elements in a ListView
-        ArrayAdapter<Place> adapter = new ArrayAdapter<Place>(this,
-                android.R.layout.simple_list_item_1, values);
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
+                android.R.layout.simple_list_item_1, placesNames);
         setListAdapter(adapter);
 
     }
@@ -71,14 +78,13 @@ public class AddToDatabaseActivity extends ListActivity  {
         if (view.getId() == R.id.button_add_to_database) {
 
 
-
-            ArrayAdapter<Place> adapter = (ArrayAdapter<Place>) getListAdapter();
+           ArrayAdapter<String> adapter = (ArrayAdapter<String>) getListAdapter();
             Place place = null;
 
- place = datasource.createPlace(titlePlace,descriptionPlace,longitudePic,latitudePic,"gore");
+            place = datasource.createPlace(titlePlace, descriptionPlace, longitudePic, latitudePic, "gore");
 
-          adapter.add(place);
-           Toast.makeText(context, "Place successfully added!", Toast.LENGTH_SHORT).show();
+            adapter.add(place.getTitle());
+            Toast.makeText(context, "Place successfully added!", Toast.LENGTH_SHORT).show();
         }
     }
 }
