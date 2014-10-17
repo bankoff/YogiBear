@@ -73,8 +73,8 @@ public class SinglePictureActivity extends Activity {
 
                 singlePlaceToDisplay = AddToDatabaseActivity.allPlacesFromTheBase
                         .get(GalleryActivity.positionSelected);
-                Toast.makeText(getBaseContext(), singlePlaceToDisplay.getTitle(), Toast.LENGTH_SHORT)
-                        .show();
+            //    Toast.makeText(getBaseContext(), singlePlaceToDisplay.getTitle(), Toast.LENGTH_SHORT)
+             //           .show();
                 title.setText(singlePlaceToDisplay.getTitle());
                 description.setText(singlePlaceToDisplay.getDescription());
             }

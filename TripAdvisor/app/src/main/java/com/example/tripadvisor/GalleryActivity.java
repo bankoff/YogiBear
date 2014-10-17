@@ -64,8 +64,8 @@ public class GalleryActivity extends Activity {
                   positionSelected=position;
                     gotoSingleView(position);
 
-                    Toast.makeText(GalleryActivity.this, "" + position,
-                            Toast.LENGTH_SHORT).show();
+//                    Toast.makeText(GalleryActivity.this, "" + position,
+//                            Toast.LENGTH_SHORT).show();
                     return  true;
                 }
 

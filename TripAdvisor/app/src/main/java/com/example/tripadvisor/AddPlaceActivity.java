@@ -63,7 +63,7 @@ public class AddPlaceActivity extends Activity implements View.OnClickListener {
     protected void onResume() {
         super.onResume();
         //1sec,1000m
-        lm.requestLocationUpdates(LocationManager.GPS_PROVIDER, 1000, 1000, getLocationListener());
+        lm.requestLocationUpdates(LocationManager.GPS_PROVIDER, 10000, 1000, getLocationListener());
     }
 
     public Location getToastLocation() {
