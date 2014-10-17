@@ -57,8 +57,8 @@ public class GalleryActivity extends Activity {
         protected void onPostExecute(Void v) {
             imageAdapter = new ImageAdapter(GalleryActivity.this, imgUrls);
             gallery.setAdapter(imageAdapter);
-            gallery.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                public void onItemClick(AdapterView parent, View v, int position, long id) {
+            gallery.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+                public boolean onItemLongClick(AdapterView parent, View v, int position, long id) {
 
 
                   positionSelected=position;
@@ -66,6 +66,7 @@ public class GalleryActivity extends Activity {
 
                     Toast.makeText(GalleryActivity.this, "" + position,
                             Toast.LENGTH_SHORT).show();
+                    return  true;
                 }
 
 

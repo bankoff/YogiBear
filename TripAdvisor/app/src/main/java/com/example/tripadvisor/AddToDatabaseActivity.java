@@ -106,13 +106,13 @@ public class AddToDatabaseActivity extends ListActivity {
 
             Toast.makeText(context, "Place successfully added!", Toast.LENGTH_SHORT).show();
         }
-        else  if (view.getId() == R.id.go_to_gallery) {
-
-
-            Intent intent = new Intent(AddToDatabaseActivity.this,
-                    GalleryActivity.class);
-            this.startActivity(intent);
-        }
+//        else  if (view.getId() == R.id.go_to_home) {
+//
+//
+//            Intent intent = new Intent(AddToDatabaseActivity.this,
+//                    HomeActivity.class);
+//            this.startActivity(intent);
+//        }
     }
 
     //Backend Services
